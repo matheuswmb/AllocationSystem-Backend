@@ -1,5 +1,7 @@
 'use strict'
 
+const ReservaController = require('../app/Controllers/Http/ReservaController');
+
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -18,3 +20,4 @@ const Route = use('Route')
 
 Route.post('/cadastro', 'AutenticadorController.register');
 Route.post('/autenticar', 'AutenticadorController.authenticate');
+Route.resource('reserva', 'ReservaController').apiOnly()
