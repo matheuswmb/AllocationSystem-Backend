@@ -18,6 +18,6 @@ const ReservaController = require('../app/Controllers/Http/ReservaController');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/cadastro', 'AutenticadorController.register');
+Route.resource('usuario', 'AutenticadorController').apiOnly();
 Route.post('/autenticar', 'AutenticadorController.authenticate');
-Route.resource('reserva', 'ReservaController').apiOnly()
+Route.resource('reserva', 'ReservaController').apiOnly();

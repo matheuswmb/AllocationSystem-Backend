@@ -36,7 +36,7 @@ class ReservaController {
    * @param {Response} ctx.response
    */
   async store ({ request }) {
-    const data = request.only(['tipo', 'qtdPessoas', 'motivo', 'data', 'hora_inicio', 'hora_fim']);
+    const data = request.only(['tipo', 'quantidade', 'motivo', 'dataInicio', 'dataFim']);
     const reserva_criada = await Reserva.create(data);
 
     return reserva_criada;
@@ -66,7 +66,7 @@ class ReservaController {
    * @param {Response} ctx.response
    */
   async update ({ params, request }) {
-    const data = request.only(['tipo', 'qtdPessoas', 'motivo', 'data', 'hora_inicio', 'hora_fim']);
+    const data = request.only(['tipo', 'quantidade', 'motivo', 'dataInicio', 'dataFim']);
     const post = await Reserva.find(params.id)
 
     post.merge(data)
