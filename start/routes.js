@@ -19,5 +19,6 @@ const ReservaController = require('../app/Controllers/Http/ReservaController');
 const Route = use('Route')
 
 Route.post('/cadastro', 'AutenticadorController.register');
-Route.post('/autenticar', 'AutenticadorController.authenticate');
-Route.resource('reserva', 'ReservaController').apiOnly()
+Route.post('/login', 'AutenticadorController.authenticate');
+Route.resource('reserva', 'ReservaController').apiOnly();
+Route.resource('sala', 'SalaController').apiOnly();
