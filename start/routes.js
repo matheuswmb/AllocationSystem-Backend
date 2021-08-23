@@ -1,5 +1,6 @@
 'use strict'
 
+const AutenticadorController = require('../app/Controllers/Http/AutenticadorController');
 const ReservaController = require('../app/Controllers/Http/ReservaController');
 
 /*
@@ -18,7 +19,14 @@ const ReservaController = require('../app/Controllers/Http/ReservaController');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/cadastro', 'AutenticadorController.register');
+Route.post('/cadastro', 'AutenticadorController.store');
 Route.post('/login', 'AutenticadorController.authenticate');
-Route.resource('reserva', 'ReservaController').apiOnly();
-Route.resource('sala', 'SalaController').apiOnly();
+//Route.get('/login', 'AutenticadorController.index')//.middleware('auth');
+Route.post('/user', 'AutenticadorController.index_token')
+Route.get('/login/:id', 'AutenticadorController.show').middleware('auth');
+Route.patch('/login/:id','AutenticadorController.update').middleware('auth');
+Route.delete('/login/:id','AutenticadorController.delete').middleware('auth');
+Route.post('/logout/','AutenticadorController.logout');
+
+Route.resource('reserva', 'ReservaController').middleware('auth').apiOnly();
+Route.resource('sala', 'SalaController').middleware('auth').apiOnly();
