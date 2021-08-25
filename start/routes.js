@@ -19,14 +19,17 @@ const ReservaController = require('../app/Controllers/Http/ReservaController');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/cadastro', 'AutenticadorController.store');
-Route.post('/login', 'AutenticadorController.authenticate');
-//Route.get('/login', 'AutenticadorController.index')//.middleware('auth');
-Route.post('/user', 'AutenticadorController.index_token')
-Route.get('/login/:id', 'AutenticadorController.show').middleware('auth');
-Route.patch('/login/:id','AutenticadorController.update').middleware('auth');
-Route.delete('/login/:id','AutenticadorController.delete').middleware('auth');
-Route.post('/logout/','AutenticadorController.logout');
+Route.post('/cadastro', 'AutenticadorController.store').apiOnly;
+Route.post('/login', 'AutenticadorController.authenticate').apiOnly;
+Route.get('/users', 'AutenticadorController.index').apiOnly//.middleware('auth');
+Route.post('/user', 'AutenticadorController.index_token').apiOnly//.middleware('auth');
+Route.get('/login/:id', 'AutenticadorController.show').apiOnly//.middleware('auth');
+Route.patch('/login/admin/:id','AutenticadorController.update_admin').apiOnly;
+Route.patch('/login/:id','AutenticadorController.update').apiOnly//.middleware('auth');
+Route.delete('/login/:id','AutenticadorController.delete').apiOnly//.middleware('auth');
+Route.post('/logout/','AutenticadorController.logout').apiOnly;
 
-Route.resource('reserva', 'ReservaController').middleware('auth').apiOnly();
-Route.resource('sala', 'SalaController').middleware('auth').apiOnly();
+Route.post('/reserva/show', 'ReservaController.show_by_id').apiOnly//.middleware('auth');
+
+Route.resource('reserva', 'ReservaController').apiOnly;//.middleware('auth').apiOnly();
+Route.resource('sala', 'SalaController').apiOnly;//.middleware('auth').apiOnly();

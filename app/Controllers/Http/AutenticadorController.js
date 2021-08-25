@@ -28,6 +28,17 @@ class AutenticadorController {
         return post
     }
 
+    async update_admin ({ params, request }) {
+        const data = request.only(['nome', 'email', 'matricula', 'password', 'is_admin']);
+        const post = await User.find(params.id)
+
+        post.merge(data)
+
+        await post.save()
+
+        return post
+    }
+
     async index () {
         const busca_dos_index = await User.all();
 

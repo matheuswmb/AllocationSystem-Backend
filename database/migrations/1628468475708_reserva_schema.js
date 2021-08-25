@@ -12,6 +12,7 @@ class ReservaSchema extends Schema {
       table.text('motivo').notNullable()
       table.datetime('dataInicio').notNullable()
       table.datetime('dataFim').notNullable()
+      table.integer('id_usuario').notNullable()
       table.timestamps() 
     })
   }
